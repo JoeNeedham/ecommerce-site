@@ -59,6 +59,8 @@ exports.requireSignin = expressJwt({
     userProperty: "auth",
 });
 
+// req.profile is created when param is definded
+
 exports.isAuth = (req, res, next) => {
     let user = req.profile && req.auth && req.profile._id == req.auth._id;
     if (!user) {

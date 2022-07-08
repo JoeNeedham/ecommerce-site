@@ -4,6 +4,7 @@ require('dotenv').config()
 const connection = require("./db");
 const userRoutes = require('./routes/auth')
 const authRoutes = require('./routes/user')
+const categoryRoutes = require('./routes/category');
 const morgan = require('morgan')
 const bodyParser = require('body-parser'); // visual req.body in terminal
 const cookieParser = require('cookie-parser');
@@ -22,6 +23,7 @@ app.use(expressValidator())
 // routes
 app.use('/api',userRoutes);
 app.use('/api', authRoutes);
+app.use('/api', categoryRoutes);
 
 
 const port = process.env.PORT || 8000
