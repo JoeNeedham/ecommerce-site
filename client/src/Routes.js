@@ -14,7 +14,9 @@ function AppRoutes() {
                 <Route path='/signin' exact element={<Signin />} />
                 <Route path='/signup' exact element={<Signup />} />
                 <Route path='/' exact element={<Home />} />
-                <PrivateRoute path='/dashboard' exact element={<Dashboard />}  />
+                <Route element={<PrivateRoute />}>
+                    <Route path='/dashboard' exact element={<Dashboard />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
