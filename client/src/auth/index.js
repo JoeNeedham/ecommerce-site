@@ -55,6 +55,7 @@ export const signout = (next) => {
     }
 }
 
+// gets user from local storage
 export const isAuthenticated = () => {
     if (typeof window == 'undefined') {
         return false;

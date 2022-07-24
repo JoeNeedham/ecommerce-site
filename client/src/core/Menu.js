@@ -21,7 +21,7 @@ function Menu() {
                     <Link className="nav-link" style={isActive(location.pathname, '/')} to='/'>Home</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" style={isActive(location.pathname, '/dashboard')} to='/dashboard'>Dashboard</Link>
+                    <Link className="nav-link" style={isActive(location.pathname, '/dashboard')} to='/user/dashboard'>Dashboard</Link>
                 </li>
                 {!isAuthenticated() && (
                     <Fragment>
