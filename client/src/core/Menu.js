@@ -20,9 +20,16 @@ function Menu() {
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(location.pathname, '/')} to='/'>Home</Link>
                 </li>
+                {isAuthenticated() && (
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(location.pathname, '/dashboard')} to='/user/dashboard'>Dashboard</Link>
                 </li>
+                )}
+                {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                <li className="nav-item">
+                    <Link className="nav-link" style={isActive(location.pathname, '/dashboard')} to='/user/admin'>Dashboard</Link>
+                </li>
+                )}
                 {!isAuthenticated() && (
                     <Fragment>
                         <li className="nav-item">

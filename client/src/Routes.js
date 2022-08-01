@@ -5,6 +5,8 @@ import Signin from  './user/Signin'
 import Home from './core/Home'
 import PrivateRoute from './auth/PrivateRoute'
 import Dashboard from './user/UserDashboard'
+import AdminDashboard from './user/AdminDashboard'
+import AdminRoute from './auth/AdminRoute'
 
 
 function AppRoutes() {
@@ -16,6 +18,9 @@ function AppRoutes() {
                 <Route path='/' exact element={<Home />} />
                 <Route element={<PrivateRoute />}>
                     <Route path='user/dashboard' exact element={<Dashboard />} />
+                </Route>
+                <Route element={<AdminRoute />}>
+                    <Route path='admin/dashboard' exact element={<AdminDashboard />} />
                 </Route>
             </Routes>
         </BrowserRouter>
