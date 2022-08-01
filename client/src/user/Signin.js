@@ -82,6 +82,9 @@ function Signin() {
                 return navigate('/user/dashboard')
             }
         }
+        if(isAuthenticated()) {
+            return navigate('/')
+        }
     }
 
     return (
