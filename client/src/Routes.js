@@ -7,6 +7,7 @@ import PrivateRoute from './auth/PrivateRoute'
 import Dashboard from './user/UserDashboard'
 import AdminDashboard from './user/AdminDashboard'
 import AdminRoute from './auth/AdminRoute'
+import AddCategory from './admin/AddCategory'
 
 
 function AppRoutes() {
@@ -17,10 +18,13 @@ function AppRoutes() {
                 <Route path='/signup' exact element={<Signup />} />
                 <Route path='/' exact element={<Home />} />
                 <Route element={<PrivateRoute />}>
-                    <Route path='user/dashboard' exact element={<Dashboard />} />
+                    <Route path='/user/dashboard' exact element={<Dashboard />} />
                 </Route>
-                <Route element={<AdminRoute />}>
-                    <Route path='admin/dashboard' exact element={<AdminDashboard />} />
+                <Route element={<AdminRoute children={<AdminDashboard />}/>}>
+                    <Route path='/admin/dashboard' exact element={<AdminDashboard />} />
+                </Route>
+                <Route element={<AdminRoute children={<AddCategory />}/>}>
+                    <Route path='/create/category' exact element={<AddCategory />} />
                 </Route>
             </Routes>
         </BrowserRouter>
