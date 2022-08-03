@@ -84,7 +84,7 @@ const AddCategory = () => {
                 </div>
             </div>
         </Layout>
-    )
-}
+    );
+};
 
 export default AddCategory;

@@ -8,6 +8,7 @@ import Dashboard from './user/UserDashboard'
 import AdminDashboard from './user/AdminDashboard'
 import AdminRoute from './auth/AdminRoute'
 import AddCategory from './admin/AddCategory'
+import AddProduct from './admin/AddProduct'
 
 
 function AppRoutes() {
@@ -25,6 +26,9 @@ function AppRoutes() {
                 </Route>
                 <Route element={<AdminRoute children={<AddCategory />}/>}>
                     <Route path='/create/category' exact element={<AddCategory />} />
+                </Route>
+                <Route element={<AdminRoute children={<AddProduct />}/>}>
+                    <Route path='/create/product' exact element={<AddProduct />} />
                 </Route>
             </Routes>
         </BrowserRouter>
