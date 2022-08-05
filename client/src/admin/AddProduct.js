@@ -22,6 +22,7 @@ const AddProduct = () => {
     });
 
     const { user, token } = isAuthenticated();
+
     const {
         name,
         description,
@@ -45,10 +46,32 @@ const AddProduct = () => {
         const value = name ===  'photo' ? event.target.files[0] : event.target.value
         formData.set(name, value)
         setValues({...values, [name]: value})
-    }
+    };
+
+    const clickSubmit = event => {
+        event.preventDefault();
+        setValues({ ...values, error: '', loading: true });
+
+        createProduct(user._id, token, formData).then(data => {
+            if(data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({
+                    ...values,
+                    name: '',
+                    description: '',
+                    photo: '',
+                    price: '',
+                    quantity: '',
+                    loading: false,
+                    createdProduct: data.name
+                });
+            }
+        })
+    };
 
     const newPostForm = () => (
-        <form className="mb-3">
+        <form onSubmit={clickSubmit} className="mb-3">
             <h4>Post Photo</h4>
             <div className="form-group">
                 <label className="btn btn-secondary">
@@ -68,13 +91,8 @@ const AddProduct = () => {
                 />
             </div>
             <div className="form-group">
-                <label className='text-muted'>Price</label>
-                <textarea
-                    onChange={handleChange('price')}
-                    type="number"
-                    className='form-control'
-                    value={price} 
-                />
+                <label className="text-muted">Price</label>
+                <input onChange={handleChange('price')} type="number" className="form-control" value={price} />
             </div>
             <div className="form-group">
                 <label className='text-muted'>Category</label>
@@ -83,6 +101,8 @@ const AddProduct = () => {
                     className='form-control'
                 >
                     <option value="62e997f4ecda435b2a4a704b">Python</option>
+                    <option value="62e997f4ecda435b2a4a704b">PHP</option>
+
                 </select>
             </div>
             <div className="form-group">
@@ -96,13 +116,8 @@ const AddProduct = () => {
                 </select>
             </div>
             <div className="form-group">
-                <label className='text-muted'>Quantity</label>
-                <textarea
-                    onChange={handleChange('quantity')}
-                    type="number"
-                    className='form-control'
-                    value={quantity} 
-                />
+                <label className="text-muted">Quantity</label>
+                <input onChange={handleChange('quantity')} type="number" className="form-control" value={quantity} />
             </div>
             <button className="btn btn-outline-primary">Create Product</button>
         </form>
