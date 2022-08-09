@@ -1,5 +1,6 @@
 import React from 'react'
 import Menu from './Menu'
+import Styles from '../styles.css'
 
 function Layout({title = "Title", description = "Description", className, children}) {
     return (

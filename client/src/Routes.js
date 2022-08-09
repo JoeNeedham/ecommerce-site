@@ -9,6 +9,7 @@ import AdminDashboard from './user/AdminDashboard'
 import AdminRoute from './auth/AdminRoute'
 import AddCategory from './admin/AddCategory'
 import AddProduct from './admin/AddProduct'
+import Shop from './core/Shop'
 
 
 function AppRoutes() {
@@ -18,6 +19,7 @@ function AppRoutes() {
                 <Route path='/signin' exact element={<Signin />} />
                 <Route path='/signup' exact element={<Signup />} />
                 <Route path='/' exact element={<Home />} />
+                <Route path='/shop' exact element={<Shop />} />
                 <Route element={<PrivateRoute />}>
                     <Route path='/user/dashboard' exact element={<Dashboard />} />
                 </Route>
