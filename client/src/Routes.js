@@ -10,6 +10,7 @@ import AdminRoute from './auth/AdminRoute'
 import AddCategory from './admin/AddCategory'
 import AddProduct from './admin/AddProduct'
 import Shop from './core/Shop'
+import Product from './core/Product'
 
 
 function AppRoutes() {
@@ -32,6 +33,7 @@ function AppRoutes() {
                 <Route element={<AdminRoute children={<AddProduct />}/>}>
                     <Route path='/create/product' exact element={<AddProduct />} />
                 </Route>
+                <Route path='/product/:productId' exact element={<Product />} />
             </Routes>
         </BrowserRouter>
     )
