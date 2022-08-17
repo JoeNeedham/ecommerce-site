@@ -4,6 +4,7 @@ const fs = require('fs');
 const Product = require("../models/product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 const { JsonWebTokenError } = require("jsonwebtoken");
+const product = require("../models/product");
 
 exports.productById = (req, res, next, id) => {
     Product.findById(id).exec((err, product) => {
@@ -240,3 +241,26 @@ exports.photo = (req, res, next) => {
     }
     next()
 };
+
+exports.listSearch = (req, res) => {
+    // create query object to hold search value and category value
+    const query = {}
+    // assign value to query.name
+    if(req.query.search) {
+        query.name = {$regex: req.query.search, $options: 'i'}
+        // assign category value to query.category
+        if(req.query.category && req.query.category != 'All') {
+            query.category = req.query.category
+        }
+        // find the product based on query object with 2 properties
+        // search and category
+        Product.find(query, (err, products) => {
+            if(err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                })
+            }
+            res.json(products);
+        }).select("-photo");
+    }
+}
