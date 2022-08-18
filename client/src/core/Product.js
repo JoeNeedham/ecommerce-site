@@ -44,7 +44,12 @@ const Product = () => {
     if(loading === true) {
         return <div>
             <div>
-                loading
+            <Layout
+            title="Please wait..."
+            description="Node React E-Commerce App"
+            className="container-fluid"
+        >
+        </Layout>
             </div>
         </div>
     } else
