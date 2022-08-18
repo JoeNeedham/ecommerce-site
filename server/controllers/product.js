@@ -7,7 +7,9 @@ const { JsonWebTokenError } = require("jsonwebtoken");
 const product = require("../models/product");
 
 exports.productById = (req, res, next, id) => {
-    Product.findById(id).exec((err, product) => {
+    Product.findById(id)
+        .populate('category')
+        .exec((err, product) => {
         if(err || !product) {
             return res.status(400).json({
                 error: "Product not found"
@@ -158,21 +160,20 @@ exports.list = (req, res) => {
 // it will find the products based on the req product category
 // other products that have the same category will be returned
 exports.listRelated = (req, res) => {
-    let limit = req.query.limt ? parseInt(req.query.limit) : 6;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
-    Product.find({_id: {$ne: req.product}, category: req.product.category})
-    .limit(limit)
-    .populate('category', '_id name')
-    .exec((err, products) => {
-        if(err){
-            return res.status(400).json({
-                error: "Products not found"
-            });
-        }
-        res.json(products);
-    });
+    Product.find({ _id: { $ne: req.product }, category: req.product.category })
+        .limit(limit)
+        .populate('category', '_id name')
+        .exec((err, products) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Products not found'
+                });
+            }
+            res.json(products);
+        });
 };
-
 exports.listCategories = (req, res) => {
     Product.distinct('category', {}, (err, categories) => {
         if(err){
