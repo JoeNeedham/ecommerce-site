@@ -1,9 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment';
+import { addItem } from './cartHelpers';
 
 const Card = ({product, showViewProductButton = true }) => {
+    const[redirect, setRedirect] = useState(false)
+
+    const navigate = useNavigate()
+
     const showViewButton = showViewProductButton => {
         return(
             showViewProductButton && (
@@ -14,11 +19,23 @@ const Card = ({product, showViewProductButton = true }) => {
                 </Link>
             )
         )
+    };
+
+    const addToCart = () => {
+        addItem(product, () => {
+            setRedirect(true)
+        })
+    };
+
+    const shouldRedirect = redirect => {
+        if(redirect){
+            return navigate('/cart')
+        }
     }
 
     const showAddToCartButton = () => {
         return (
-            <button className='btn btn-outline-warning mt-2 mb-2'>
+            <button onClick={addToCart} className='btn btn-outline-warning mt-2 mb-2'>
                 Add to cart
             </button>
         );
@@ -34,17 +51,18 @@ const Card = ({product, showViewProductButton = true }) => {
         <div className="card">
             <div className="card-header name">{product.name}</div>
             <div className="card-body">
-            <ShowImage item={product} url='product' />
+                {shouldRedirect(redirect)}
+                <ShowImage item={product} url='product' />
                 <p className='lead mt-2'>{product && product.description && product.description.substring(0, 100)}</p>
                 <p className='black-10'>${product.price}</p>
                 <p className='black-9'>Category: {product.category && product.category.name}</p>
                 <p className='black-8'>
                     Added on {moment(product.createdAt).fromNow()}
                 </p>
-                    {showStock(product.quantity)}
-                    <br />
-                    {showViewButton(showViewProductButton)}
-                    {showAddToCartButton()}
+                {showStock(product.quantity)}
+                <br />
+                {showViewButton(showViewProductButton)}
+                {showAddToCartButton()}
             </div>
         </div>
     )

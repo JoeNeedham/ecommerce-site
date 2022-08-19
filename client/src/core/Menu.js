@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { signout, isAuthenticated } from '../auth'
+import { itemTotal } from './cartHelpers'
 
 function Menu() {
     const location = useLocation();
@@ -22,6 +23,9 @@ function Menu() {
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(location.pathname, '/shop')} to='/shop'>Shop</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" style={isActive(location.pathname, '/cart')} to='/cart'>Cart <sup><small className='cart-badge'>{itemTotal()}</small></sup> </Link>
                 </li>
                 {isAuthenticated().user.role === 0 && (
                 <li className="nav-item">
