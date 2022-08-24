@@ -11,6 +11,7 @@ import AddCategory from './admin/AddCategory'
 import AddProduct from './admin/AddProduct'
 import Shop from './core/Shop'
 import Product from './core/Product'
+import Cart from './core/Cart'
 
 
 function AppRoutes() {
@@ -34,6 +35,8 @@ function AppRoutes() {
                     <Route path='/create/product' exact element={<AddProduct />} />
                 </Route>
                 <Route path='/product/:productId' exact element={<Product />} />
+                <Route path='/cart' exact element={<Cart />} />
+
             </Routes>
         </BrowserRouter>
     )
