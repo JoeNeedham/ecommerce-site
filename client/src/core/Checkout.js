@@ -28,7 +28,6 @@ const Checkout = ({products}) => {
         <div>
             <h2>Total: ${getTotal()}</h2>
             {showCheckout()}
-            {/* update */}
         </div>
     );
 };
