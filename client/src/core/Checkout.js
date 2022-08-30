@@ -1,11 +1,39 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import { getProducts } from "./apiCore";
+import { getProducts, getBraintreeClientToken } from "./apiCore";
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+import DropIn from 'braintree-web-drop-in-react'
 
 const Checkout = ({products}) => {
+    const [data, setData] = useState({
+        success: false,
+        clientToken: null,
+        error: '',
+        instance: {},
+        address: ''
+    })
+
+    const userId = isAuthenticated() && isAuthenticated().user._id
+    const token = isAuthenticated() && isAuthenticated().token
+
+    const getToken = (userId, token) => {
+        getBraintreeClientToken(userId, token).then(data => {
+            
+            if(data.error) {
+                setData({ ...data, error: data.error});
+            } else {
+                console.log(data)
+                setData({ ...data, clientToken: data.clientToken })
+            }
+        });
+    };
+
+    useEffect(() => {
+        getToken(userId, token)
+    }, [])
+
     const getTotal = () =>{
         // .reduce method will take the 
         return products.reduce((currentValue, nextValue) =>{
@@ -14,7 +42,7 @@ const Checkout = ({products}) => {
     };
     const showCheckout = () => {
         return isAuthenticated() ? (
-            <button className="btn btn-success">Checkout</button>
+            <button className="btn btn-success">{showDropIn()}</button>
         ) : (
             <Link to="/signin">
                 <button className="btn btn-primary">
@@ -23,6 +51,36 @@ const Checkout = ({products}) => {
             </Link>
         )
     };
+
+    const buy = () => {
+        let nonce;
+        let getNonce  = data.instance.requestPaymentMethod().then(data => {
+            console.log(data)
+            nonce = data.nonce
+            // once you have nonce (card type, card number) send nonce as 'paymentMethodNonce'
+            // and also total to be charged
+            console.log('send nonce and total to process:', nonce, getTotal(products))
+        })
+        .catch(error => {
+            console.log('dropin error:', error)
+            setData({...data, error: error.message})
+        })
+    }
+
+    const showDropIn = () => (
+        <div>
+            {data.clientToken !== null && products.length > 0 ? (
+                <div>
+                    <DropIn options={{
+                        authorization: data.clientToken
+                    }} onInstance={instance => (data.instance = instance)} />
+                    <button onClick={buy} className="btn btn-success">
+                        Pay
+                    </button>
+                </div>
+            ) : null}
+        </div>
+    )
     
     return (
         <div>
