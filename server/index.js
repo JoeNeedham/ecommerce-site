@@ -1,19 +1,23 @@
 const express = require('express');
-const app = express();
 require('dotenv').config()
-const connection = require("./db");
-const userRoutes = require('./routes/auth');
-const authRoutes = require('./routes/user');
-const categoryRoutes = require('./routes/category');
-const productRoutes = require('./routes/product');
 const morgan = require('morgan')
 const bodyParser = require('body-parser'); // visual req.body in terminal
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 
+// app
+const app = express();
+
+// import routes
+const userRoutes = require('./routes/auth');
+const authRoutes = require('./routes/user');
+const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
+const braintreeRoutes = require("./routes/braintree");
 
 // database
+const connection = require("./db");
 connection()
 
 // middleware
@@ -28,6 +32,7 @@ app.use('/api',userRoutes);
 app.use('/api', authRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
+app.use('/api', braintreeRoutes)
 
 
 const port = process.env.PORT || 8000
