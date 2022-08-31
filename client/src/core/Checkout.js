@@ -24,7 +24,6 @@ const Checkout = ({products}) => {
             if(data.error) {
                 setData({ ...data, error: data.error});
             } else {
-                console.log(data)
                 setData({ ...data, clientToken: data.clientToken })
             }
         });
@@ -42,7 +41,7 @@ const Checkout = ({products}) => {
     };
     const showCheckout = () => {
         return isAuthenticated() ? (
-            <button className="btn btn-success">{showDropIn()}</button>
+            <div>{showDropIn()}</div>
         ) : (
             <Link to="/signin">
                 <button className="btn btn-primary">
@@ -68,7 +67,7 @@ const Checkout = ({products}) => {
     }
 
     const showDropIn = () => (
-        <div>
+        <div onBlur={() => setData({ ...data, error: ""})}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
                     <DropIn options={{
@@ -79,6 +78,12 @@ const Checkout = ({products}) => {
                     </button>
                 </div>
             ) : null}
+        </div>
+    )
+
+    const showError = error => (
+        <div className="alert alert-danger" style={{display: error? '' : 'none'}}>
+            {error}
         </div>
     )
     
