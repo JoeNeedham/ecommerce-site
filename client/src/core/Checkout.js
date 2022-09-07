@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { getProducts, getBraintreeClientToken, processPayment } from "./apiCore";
+import {emptyCart} from './cartHelpers';
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
@@ -67,6 +68,9 @@ const Checkout = ({products}) => {
             processPayment(userId, token, paymentData)
                 .then(response => {
                     setData({ ...data, success: response.success });
+                    emptyCart(() => {
+                        console.log('payment success and empty cart')
+                    })
                     //empty cart
                     //create order
                 })
