@@ -82,9 +82,10 @@ const Checkout = ({products}) => {
                 .then(response => {
                     //empty cart
                     //create order
+                    console.log(response)
                     const createOrderData = {
                         products: products,
-                        transaction_id:response.transaction.id,
+                        transaction_id: response.transaction.id,
                         amount: response.transaction.amount,
                         address: data.address
                     };
