@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const braintree = require("braintree")
+const braintree = require('braintree');
 require('dotenv').config()
 
 
@@ -33,11 +33,11 @@ exports.processPayment = (req, res) => {
             }
         },
         (error, result) => {
-            if(error){
+            if (error) {
                 res.status(500).json(error);
             } else {
                 res.json(result);
             }
         }
-    )
+    );
 };
