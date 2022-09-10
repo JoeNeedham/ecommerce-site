@@ -27,7 +27,7 @@ function Menu() {
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(location.pathname, '/cart')} to='/cart'>Cart <sup><small className='cart-badge'>{itemTotal()}</small></sup> </Link>
                 </li>
-                {isAuthenticated().user.role === 0 && (
+                {isAuthenticated() && isAuthenticated().user.role === 0 && (
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(location.pathname, '/dashboard')} to='/user/dashboard'>Dashboard</Link>
                 </li>

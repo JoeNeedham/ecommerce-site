@@ -6,7 +6,6 @@ import AdminDashboard from '../user/AdminDashboard';
 function AdminRoute({children}) {
 
     const isAuth =  isAuthenticated();
-    console.log(isAuth.user.role)
 
     return (
         isAuth && isAuth.user.role === 1 ? children : <Signin />
