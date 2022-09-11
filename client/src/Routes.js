@@ -12,6 +12,7 @@ import AddProduct from './admin/AddProduct'
 import Shop from './core/Shop'
 import Product from './core/Product'
 import Cart from './core/Cart'
+import Orders from './admin/Orders';
 
 
 function AppRoutes() {
@@ -36,7 +37,9 @@ function AppRoutes() {
                 </Route>
                 <Route path='/product/:productId' exact element={<Product />} />
                 <Route path='/cart' exact element={<Cart />} />
-
+                <Route element={<AdminRoute children={<Orders />}/>}>
+                    <Route path='/admin/orders' exact element={<Orders />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
