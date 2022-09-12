@@ -4,6 +4,7 @@ import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import { listOrders, getStatusValues } from './apiAdmin';
 import moment from 'moment';
+import { updateOrderStatus } from '../../../server/controllers/order';
 
 const Orders = () => {
 
@@ -64,8 +65,14 @@ const Orders = () => {
     );
 
     const handleStatusChange = (e, orderId) => {
-        console.log('update order status');
-    }
+        updateOrderStatus(user._id, token, orderId, e.target.value).then(data => {
+            if(data.error){
+                console.log('Status update failed')
+            } else {
+                loadOrders()
+            }
+        });
+    };
 
     const showStatus = o => (
         <div className="form-group">
