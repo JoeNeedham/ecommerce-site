@@ -13,6 +13,7 @@ import Shop from './core/Shop'
 import Product from './core/Product'
 import Cart from './core/Cart'
 import Orders from './admin/Orders';
+import Profile from './user/Profile';
 
 
 function AppRoutes() {
@@ -23,7 +24,7 @@ function AppRoutes() {
                 <Route path='/signup' exact element={<Signup />} />
                 <Route path='/' exact element={<Home />} />
                 <Route path='/shop' exact element={<Shop />} />
-                <Route element={<PrivateRoute />}>
+                <Route element={<PrivateRoute children={<Dashboard />} />}>
                     <Route path='/user/dashboard' exact element={<Dashboard />} />
                 </Route>
                 <Route element={<AdminRoute children={<AdminDashboard />}/>}>
@@ -39,6 +40,9 @@ function AppRoutes() {
                 <Route path='/cart' exact element={<Cart />} />
                 <Route element={<AdminRoute children={<Orders />}/>}>
                     <Route path='/admin/orders' exact element={<Orders />} />
+                </Route>
+                <Route element={<PrivateRoute children={<Profile />} />}>
+                    <Route path='/profile/:userId' exact element={<Profile />} />
                 </Route>
             </Routes>
         </BrowserRouter>

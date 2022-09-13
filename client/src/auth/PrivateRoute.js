@@ -3,12 +3,12 @@ import { isAuthenticated } from './index';
 import Dashboard from '../user/UserDashboard';
 import Signin from '../user/Signin'
 
-function PrivateRoute() {
+function PrivateRoute({children}) {
 
     const isAuth =  isAuthenticated();
 
     return (
-        isAuth ? <Dashboard /> : <Signin />
+        isAuth ? <children /> : <Signin />
     )
 }
 
