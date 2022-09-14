@@ -14,6 +14,7 @@ import Product from './core/Product'
 import Cart from './core/Cart'
 import Orders from './admin/Orders';
 import Profile from './user/Profile';
+import ManageProducts from './admin/ManageProducts'
 
 
 function AppRoutes() {
@@ -43,6 +44,9 @@ function AppRoutes() {
                 </Route>
                 <Route element={<PrivateRoute children={<Profile />} />}>
                     <Route path='/profile/:userId' exact element={<Profile />} />
+                </Route>
+                <Route element={<AdminRoute children={<ManageProducts />}/>}>
+                    <Route path='/admin/products' exact element={<ManageProducts />} />
                 </Route>
             </Routes>
         </BrowserRouter>
