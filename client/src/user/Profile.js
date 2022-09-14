@@ -31,6 +31,44 @@ const Profile = (match) => {
         init(match.params.userId)
     }, [])
 
+    const handleChange = (e) => {
+
+    }
+
+    const profileUpdate = (name, email, password) => (
+        <form>
+            <div className="form-group">
+                <label className="text-muted">Name</label>
+                <input
+                    type="text"
+                    onChange={handleChange('name')}
+                    className="form-control"
+                    value={name} 
+                    />
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Email</label>
+                <input
+                    type="email"
+                    onChange={handleChange('email')}
+                    className="form-control"
+                    value={email} 
+                    />
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Password</label>
+                <input
+                    type="password"
+                    onChange={handleChange('password')}
+                    className="form-control"
+                    value={password} 
+                    />
+
+                    <button onClick={clickSubmit} className="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    )
+
     return (
         <Layout
             title="Profile"
@@ -38,6 +76,8 @@ const Profile = (match) => {
             className="container-fluid"
         >
             <h2 className="mb-4">Profile update</h2>
+
+            {profileUpdate(name, email, password)}
         </Layout>
     );
 };
