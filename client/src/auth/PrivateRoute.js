@@ -8,7 +8,7 @@ function PrivateRoute({children}) {
     const isAuth =  isAuthenticated();
 
     return (
-        isAuth ? <children /> : <Signin />
+        isAuth ? children : <Signin />
     )
 }
 
