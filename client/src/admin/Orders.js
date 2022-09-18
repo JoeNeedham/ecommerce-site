@@ -34,6 +34,7 @@ const Orders = () => {
     useEffect(() => {
         loadOrders();
         loadStatusValues();
+        // eslint-disable-next-line
     },[]);
 
     const showOrdersLength = (orders) => {

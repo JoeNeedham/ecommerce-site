@@ -31,6 +31,7 @@ const Profile = (match) => {
 
     useEffect(() => {
         init(match.params.userId)
+        // eslint-disable-next-line
     },[])
 
     const handleChange = name => (e) => {

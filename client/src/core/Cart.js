@@ -10,6 +10,7 @@ const Cart = () => {
 
     useEffect(() => {
         setItems(getCart());
+        // eslint-disable-next-line
     }, []);
 
     const showItems = (items) => {

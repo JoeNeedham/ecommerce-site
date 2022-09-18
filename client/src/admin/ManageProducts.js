@@ -32,6 +32,7 @@ const ManageProducts = () => {
 
     useEffect(() => {
         loadProducts()
+        // eslint-disable-next-line
     }, [])
     return (
         <Layout

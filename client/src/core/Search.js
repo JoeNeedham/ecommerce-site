@@ -25,6 +25,7 @@ const Search = () => {
 
     useEffect(() => {
         loadCategories()
+        // eslint-disable-next-line
     }, [])
 
     const searchData = () => {

@@ -32,8 +32,6 @@ const UpdateProduct = ({match}) => {
         description,
         price,
         categories,
-        category,
-        shipping,
         quantity,
         loading,
         error,
@@ -77,7 +75,7 @@ const UpdateProduct = ({match}) => {
 
     useEffect(() => {
         init(productId);
-
+        // eslint-disable-next-line
     },[]);
 
     const handleChange = name => event => {

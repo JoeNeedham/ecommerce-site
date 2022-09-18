@@ -39,6 +39,7 @@ const Product = () => {
                 }, 2000);
         }
         loadSingleProduct(productId)
+        // eslint-disable-next-line
     }, [productId, loading])
     if(loading === true) {
         return <div>

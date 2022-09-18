@@ -44,10 +44,10 @@ const AddProduct = () => {
             }
         })
     }
-    
-// eslint-disable-next-line
+
     useEffect(() => {
         init();
+    // eslint-disable-next-line    
     },[]);
 
     const handleChange = name => event => {
