@@ -1,7 +1,6 @@
 import React from 'react';
 import { isAuthenticated } from './index';
 import Signin from '../user/Signin'
-import AdminDashboard from '../user/AdminDashboard';
 
 function AdminRoute({children}) {
 

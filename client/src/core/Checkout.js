@@ -35,7 +35,7 @@ const Checkout = ({products}) => {
 
     useEffect(() => {
         getToken(userId, token)
-    });
+    },[]);
     
     const handleAddress = event => {
         setData({...data, address: event.target.value});

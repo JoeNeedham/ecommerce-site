@@ -78,7 +78,7 @@ const UpdateProduct = ({match}) => {
     useEffect(() => {
         init(productId);
 
-    }, []);
+    },[]);
 
     const handleChange = name => event => {
         const value = name ===  'photo' ? event.target.files[0] : event.target.value
