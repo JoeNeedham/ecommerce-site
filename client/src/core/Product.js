@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const Product = () => {
     const [product, setProduct] = useState({})
     const [relatedProduct, setRelatedProduct] = useState({})
+    // eslint-disable-next-line
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true);
 

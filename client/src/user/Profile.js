@@ -17,6 +17,7 @@ const Profile = (match) => {
 
     const {token} = isAuthenticated()
 
+// eslint-disable-next-line
     const {name, email, password, error, success} = values
 
     const init = (userId) => {

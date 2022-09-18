@@ -67,6 +67,7 @@ const Checkout = ({products}) => {
         // send the noce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
+        // eslint-disable-next-line
         let getNonce  = data.instance.requestPaymentMethod().then(data1 => {
             console.log(data1)
             nonce = data.nonce

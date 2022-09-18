@@ -184,7 +184,7 @@ const UpdateProduct = ({match}) => {
     const redirectUser = () => {
         if(redirectToProfile){
             if(!error) {
-                return Navigate('/')
+                return navigate('/')
             }
         }
     }
@@ -199,7 +199,8 @@ const UpdateProduct = ({match}) => {
                 {showLoading()}
                 {showSuccess()}
                 {showError()}
-                {newPostForm()}  
+                {newPostForm()} 
+                {redirectUser()} 
             </div>
         </div>
     </Layout>
