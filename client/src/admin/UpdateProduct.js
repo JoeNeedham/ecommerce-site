@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getProduct, getCategories, updateProduct } from './apiAdmin';
 
 const UpdateProduct = ({match}) => {
