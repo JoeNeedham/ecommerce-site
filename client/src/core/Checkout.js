@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./Layout";
 import {
-    getProducts,
     getBraintreeClientToken,
     processPayment,
     createOrder
 } from "./apiCore";
 import {emptyCart} from './cartHelpers';
-import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import DropIn from 'braintree-web-drop-in-react'
@@ -38,7 +35,7 @@ const Checkout = ({products}) => {
 
     useEffect(() => {
         getToken(userId, token)
-    }, [])
+    });
     
     const handleAddress = event => {
         setData({...data, address: event.target.value});

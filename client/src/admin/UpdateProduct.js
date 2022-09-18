@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
-import { createProduct, getCategories } from './apiAdmin';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { getProduct, getCategories, updateProduct } from './apiAdmin';
 
-const AddProduct = () => {
+const UpdateProduct = ({match}) => {
     const [values, setValues] = useState({
         name: '',
         description: '',
@@ -19,6 +20,10 @@ const AddProduct = () => {
         redirectToProfile: false,
         formData: ''
     });
+
+    let { productId } = useParams()
+
+    const navigate = useNavigate();
 
     const { user, token } = isAuthenticated();
 
@@ -37,20 +42,43 @@ const AddProduct = () => {
         formData
     } = values;
 
-    // load categories and set form data
-    const init = () => {
-        getCategories().then(data => {
+    const init = (productId) => {
+        getProduct(productId).then(data => {
             if(data.error) {
                 setValues({...values, error: data.error})
             } else {
-                setValues({...values, categories: data, formData: new FormData()})
+                // populate the state
+                setValues({
+                    ...values,
+                    name: data.name,
+                    description: data.description,
+                    price: data.price,
+                    category: data.category._id,
+                    shipping: data.shipping,
+                    quantity: data.quantity,
+                    formData: new FormData()
+                });
+                // load categories
+                initCategories();
             }
         })
     }
 
+    // load categories and set form data
+    const initCategories = () => {
+        getCategories().then(data => {
+            if(data.error) {
+                setValues({...values, error: data.error})
+            } else {
+                setValues({categories: data, formData: new FormData()})
+            }
+        });
+    };
+
     useEffect(() => {
-        init();
-    });
+        init(productId);
+
+    }, []);
 
     const handleChange = name => event => {
         const value = name ===  'photo' ? event.target.files[0] : event.target.value
@@ -62,7 +90,7 @@ const AddProduct = () => {
         event.preventDefault();
         setValues({ ...values, error: '', loading: true });
 
-        createProduct(user._id, token, formData).then(data => {
+        updateProduct(productId, user._id, token, formData).then(data => {
             if(data.error) {
                 setValues({ ...values, error: data.error });
             } else {
@@ -143,7 +171,7 @@ const AddProduct = () => {
 
     const showSuccess = () => (
         <div className="alert alert-info" style={{display: createdProduct ? '' : 'none'}}>
-            <h2>{`${createdProduct}`} is created!</h2>
+            <h2>{`${createdProduct}`} is updated!</h2>
         </div>
     )
     
@@ -153,7 +181,15 @@ const AddProduct = () => {
                 <h2>Loading...</h2>
             </div>
         )
-    )
+    );
+
+    const redirectUser = () => {
+        if(redirectToProfile){
+            if(!error) {
+                return Navigate('/')
+            }
+        }
+    }
 
     return (
     <Layout
@@ -172,4 +208,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct
+export default UpdateProduct

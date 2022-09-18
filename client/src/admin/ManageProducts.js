@@ -40,15 +40,16 @@ const ManageProducts = () => {
             className="container-fluid"
         >
             <div className='row'>
+                <div className="text-center">{products.length} products</div>
                 <div>
                     <div className='col-12'>
                         <ul className='list-group'>
                             {products.map((p, i) =>(
                                 <li 
                                     key={i}
-                                    className='list-group d-flex justify-content-between align-items-center'
+                                    className='list-group-item d-flex justify-content-between align-items-center'
                                     >
-                                        <storng>{p.name}</storng>
+                                        <strong>{p.name}</strong>
                                         <Link to={`/admin/product/update/${p._id}`}>
                                             <span className='badge badge-warning badge-pill'>
                                                 Update

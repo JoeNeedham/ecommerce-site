@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { read, listRelated } from "./apiCore";
 import Card from "./Card";
-import Search from "./Search";
 import { useParams } from "react-router-dom";
 
 const Product = () => {
@@ -40,7 +39,7 @@ const Product = () => {
                 }, 2000);
         }
         loadSingleProduct(productId)
-    }, [productId])
+    }, [productId, loading])
     if(loading === true) {
         return <div>
             <div>

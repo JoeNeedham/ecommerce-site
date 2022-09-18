@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { isAuthenticated } from '../auth';
 import Layout from '../core/Layout';
-import { Link } from 'react-router-dom';
 import {read, update, updateUser} from './apiUser';
 import { useNavigate } from 'react-router-dom'
 
@@ -32,7 +31,7 @@ const Profile = (match) => {
 
     useEffect(() => {
         init(match.params.userId)
-    }, [])
+    })
 
     const handleChange = name => (e) => {
         setValues({ ...values, error: false, [name]: e.target.value})
