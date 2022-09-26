@@ -14,13 +14,15 @@ const Dashboard = () => {
     
     const init = (userId, token) => {
         getPurchaseHistory(userId, token).then(data => {
-            if (data.error) {
-                console.log(data.error);
+            if (data.err) {
+                console.log(data.err);
             } else {
                 setHistory(data);
             }
         });
     };
+
+    //edit
 
     useEffect(() => {
         init(_id, token);
