@@ -1,0 +1,3 @@
+name: my-backend-server
+buildCommand: npm install
+startCommand: nodemon app.js
